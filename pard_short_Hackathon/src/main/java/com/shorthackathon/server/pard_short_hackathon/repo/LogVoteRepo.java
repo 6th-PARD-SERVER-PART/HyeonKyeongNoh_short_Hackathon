@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface LogVoteRepo extends JpaRepository<LogVote, Integer> {
     void deleteAllByRuleId(Long  ruleId);
 
-    boolean findByUserNameAndRuleId(String userName, Long ruleId);
+    LogVote findByUserNameAndRuleId(String userName, Long ruleId);
 }

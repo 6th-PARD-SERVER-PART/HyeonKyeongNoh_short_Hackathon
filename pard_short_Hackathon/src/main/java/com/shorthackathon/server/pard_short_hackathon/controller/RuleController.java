@@ -48,16 +48,4 @@ public class RuleController {
                     .body(e.getMessage());
         }
     }
-
-    @DeleteMapping("/{ruleId}")
-    public ResponseEntity<?> deleteRule(@PathVariable Long ruleId)
-    {
-        try {
-            Vote res = voteService.save(ruleId,true);
-            return ResponseEntity.ok(res);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
 }

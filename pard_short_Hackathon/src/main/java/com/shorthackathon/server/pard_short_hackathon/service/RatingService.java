@@ -38,6 +38,6 @@ public class RatingService {
     }
 
     public float getRatingUser(String userName) {
-        return ratingRepo.AvgRatingByUserName(userName);
+        return ratingRepo.AvgRatingByTargetName(userName);
     }
 }

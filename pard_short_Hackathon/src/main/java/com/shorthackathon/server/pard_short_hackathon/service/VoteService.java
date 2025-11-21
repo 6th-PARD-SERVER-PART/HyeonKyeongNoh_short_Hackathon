@@ -50,6 +50,8 @@ public class VoteService {
                 .userName(voteInfo.getUserName())
                 .build();
         logVoteRepo.save(logVote);
+        if(voteRepo.findByRuleId(voteInfo.getRuleId())==null)
+            save(voteInfo.getRuleId(), true);
         Vote vote = voteRepo.findByRuleId(voteInfo.getRuleId());
         //몇 명인지
         Integer member = scheduleService.getMember().size()/2;
@@ -65,7 +67,8 @@ public class VoteService {
         if(vote.getTrueCheck() > member){
             //delete 룰
             if(vote.getAvailable()){
-                ruleService.delete(voteInfo.getRuleId());
+                Rule rule = ruleRepo.findByRuleId(voteInfo.getRuleId());
+                ruleRepo.delete(rule);
                 logVoteRepo.deleteAllByRuleId(voteInfo.getRuleId());
                 voteRepo.delete(vote);
             }
@@ -94,10 +97,10 @@ public class VoteService {
     }
 
     public Integer checkLogVote(String userName, Long ruleId) {
-        if(logVoteRepo.findByUserNameAndRuleId(userName, ruleId))
-            return 1;
-        else
+        if(logVoteRepo.findByUserNameAndRuleId(userName, ruleId)==null)
             return 0;
+        else
+            return 1;
     }
 
     public List<Vote> getLogVote() {
