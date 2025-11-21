@@ -1,4 +1,3 @@
-
 package com.shorthackathon.server.pard_short_hackathon.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +11,10 @@ public class CorsConfig implements WebMvcConfigurer {
 //        어떤 경로든
         registry.addMapping("/**")
                 // localhost:3000에서 오는 요청을 허용
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("*")
                 // GET, POST, PUT, DELETE 요청을 허용
                 .allowedMethods("GET","POST","PATCH","DELETE")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(false);
     }
 }
